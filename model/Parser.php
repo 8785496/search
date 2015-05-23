@@ -2,9 +2,8 @@
 
 class Parser 
 {
-    public static function getContent($p, $q) 
+    public static function getContent($p, $q, $provs) 
     {
-        $provs = Config::getProvs();
         $parserName = $provs[$p]['parser'];
         $filename = BASE_DIR . "/model/$parserName.php";
         if (file_exists($filename)) {
