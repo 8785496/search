@@ -14,7 +14,7 @@ if (isset($_GET['p']) && isset($_GET['q'])){
         exit;
     }
     Helper::render('list', array(
-        'data' => Parser::getContent($p, $q, $provs),
+        'data' => Parser::getContent($provs[$p]['parser'], $q),
         'provs' => $provs,
         'p' => $p,
         'q' => $q
