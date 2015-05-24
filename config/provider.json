@@ -1,11 +1,14 @@
 {
     "google": {
         "name": "Google",
-        "parser": "ParserGoogle"
-
+        "parser": "ParserGoogle",
+        "params": {}
     },
     "bing": {
         "name": "Bing",
-        "parser": "ParserBing"
+        "parser": "ParserBing",
+        "params": {
+            "acctKey": "<your key>"
+        }
     }
 }

@@ -6,9 +6,10 @@ class ParserGoogle implements IParser
      * Gets data from Google
      * 
      * @param string $q query
+     * @param array $params
      * @return array
      */
-    public function getData($q) 
+    public function getData($q, $params) 
     {
         $responseJson = $this->getJsonFromGoogle($q);
         $response = json_decode($responseJson);

@@ -1,14 +1,17 @@
 <?php
 
-class ParserBing implements IParser {
+class ParserBing implements IParser 
+{
     /**
      * Gets data from Bing
      * 
      * @param string $q query
+     * @param array $params
      * @return array
      */
-    public function getData($q) {
-        $responseJson = $this->getJsonFromBing($q);
+    public function getData($q, $params) 
+    {
+        $responseJson = $this->getJsonFromBing($q, $params['acctKey']);
         $response = json_decode($responseJson);
         $data = array();
         foreach ($response->d->results as $result) {
@@ -25,10 +28,11 @@ class ParserBing implements IParser {
      * Gets data format JSON from Bing
      * 
      * @param string $q query
+     * @param string $acctKey
      * @return string
      */
-    private function getJsonFromBing($q) {
-        $acctKey = require(BASE_DIR . '/protect/keyBing.php');
+    private function getJsonFromBing($q, $acctKey) 
+    {
         $rootUri = 'https://api.datamarket.azure.com/Bing/Search';
         // Encode the query and the single quotes that must surround it.
         $query = urlencode("'$q'");

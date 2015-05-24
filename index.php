@@ -4,7 +4,7 @@ define('BASE_DIR', __DIR__);
 require BASE_DIR . '/lib/IParser.php';
 require BASE_DIR . '/lib/Helper.php';
 
-$provsJson = file_get_contents(BASE_DIR . '/config/provider.json');
+$provsJson = file_get_contents(BASE_DIR . '/config/provider_protect.json');
 $provs = json_decode($provsJson, true);
 
 if (isset($_GET['p']) && isset($_GET['q'])){    
@@ -16,7 +16,7 @@ if (isset($_GET['p']) && isset($_GET['q'])){
     }
     $parser = Helper::createParser($provs[$p]['parser'], 'IParser');
     Helper::render('list', array(
-        'data' => $parser->getData($q),
+        'data' => $parser->getData($q, $provs[$p]['params']),
         'provs' => $provs,
         'p' => $p,
         'q' => $q
