@@ -1,14 +1,18 @@
 <?php
 
-class ParserGoogle 
+class ParserGoogle implements IParser 
 {
-    public function getData($q)
+    /**
+     * Gets data from Google
+     * 
+     * @param string $q query
+     * @return array
+     */
+    public function getData($q) 
     {
-        $data = array();
-        $baseUri = 'https://ajax.googleapis.com/ajax/services/search/web?v=1.0';
-        $requestUri = $baseUri . '&q=' . urlencode($q) . '&userip=' . $_SERVER['REMOTE_ADDR'];
-        $responseJson = file_get_contents($requestUri);
+        $responseJson = $this->getJsonFromGoogle($q);
         $response = json_decode($responseJson);
+        $data = array();
         foreach ($response->responseData->results as $result) {
             $data[] = array(
                 'url' => $result->url,
@@ -18,5 +22,17 @@ class ParserGoogle
             );
         }
         return $data;
+    }
+    /**
+     * Gets data format JSON from Google
+     * 
+     * @param string $q query
+     * @return string
+     */
+    private function getJsonFromGoogle($q) 
+    {
+        $baseUri = 'https://ajax.googleapis.com/ajax/services/search/web?v=1.0';
+        $requestUri = $baseUri . '&q=' . urlencode($q) . '&userip=' . $_SERVER['REMOTE_ADDR'];
+        return file_get_contents($requestUri);
     }
 }

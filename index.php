@@ -1,10 +1,11 @@
 <?php
 define('BASE_DIR', __DIR__);
 
-require BASE_DIR . '/model/Parser.php';
+require BASE_DIR . '/lib/IParser.php';
 require BASE_DIR . '/lib/Helper.php';
 
-$provs = require(BASE_DIR . '/config/provider.php');
+$provsJson = file_get_contents(BASE_DIR . '/config/provider.json');
+$provs = json_decode($provsJson, true);
 
 if (isset($_GET['p']) && isset($_GET['q'])){    
     $p = $_GET['p'];
@@ -13,8 +14,9 @@ if (isset($_GET['p']) && isset($_GET['q'])){
         header('Location: .');
         exit;
     }
+    $parser = Helper::createParser($provs[$p]['parser'], 'IParser');
     Helper::render('list', array(
-        'data' => Parser::getContent($provs[$p]['parser'], $q),
+        'data' => $parser->getData($q),
         'provs' => $provs,
         'p' => $p,
         'q' => $q

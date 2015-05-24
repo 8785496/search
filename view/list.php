@@ -1,6 +1,6 @@
 <div class="row marketing">
     <form action="/index.php">
-        <label for="q">Search in:</label>
+        <p>Search in:</p>
         <?php foreach ($provs as $key => $value): ?>
             <div class="radio">
                 <label>    

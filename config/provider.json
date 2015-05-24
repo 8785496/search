@@ -1,0 +1,11 @@
+{
+    "google": {
+        "name": "Google",
+        "parser": "ParserGoogle"
+
+    },
+    "bing": {
+        "name": "Bing",
+        "parser": "ParserBing"
+    }
+}
